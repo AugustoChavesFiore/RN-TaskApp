@@ -1,0 +1,42 @@
+//Las tareas deben tener: Título, Descripción, Autor y Fecha.
+
+[
+    {
+        "id": 1,
+        "title": "Tarea 1",
+        "description": "Descripción de la tarea 1",
+        "author": "Autor 1",
+        "date": "2021-09-01"
+
+    },
+    {
+        "id": 2,
+        "title": "Tarea 2",
+        "description": "Descripción de la tarea 2",
+        "author": "Autor 2",
+        "date": "2021-09-02"
+
+    },
+    {
+        "id": 3,
+        "title": "Tarea 3",
+        "description": "Descripción de la tarea 3",
+        "author": "Autor 3",
+        "date": "2021-09-03"
+    },
+    {
+        "id": 4,
+        "title": "Tarea 4",
+        "description": "Descripción de la tarea 4",
+        "author": "Autor 4",
+        "date": "2021-09-04"
+    },
+    {
+        "id": 5,
+        "title": "Tarea 5",
+        "description": "Descripción de la tarea 5",
+        "author": "Autor 5",
+        "date": "2021-09-05"
+    }
+
+]
