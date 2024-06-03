@@ -6,10 +6,12 @@ import { useTaskContext } from './context/TaskContext'
 import TaskCard from './components/TaskCard'
 import { ScaledSheet } from 'react-native-size-matters'
 import { Icon } from 'react-native-paper'
+import { useEffect } from 'react'
 
 
 export default function index() {
   const { tasks } = useTaskContext();
+
 
   return (
     <View style={styles.container}>

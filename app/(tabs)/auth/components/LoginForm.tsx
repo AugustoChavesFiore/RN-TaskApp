@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { Button, HelperText, TextInput, Text } from 'react-native-paper'
 import { ScaledSheet } from 'react-native-size-matters'
 import { useState } from 'react';
-import { Link, Redirect, router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useAuthContext } from '../context/AuthContext';
 
 type FormData = {

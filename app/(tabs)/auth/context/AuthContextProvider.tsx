@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         if (user && user.password === data.password) {
             setUser({
                 email: user.email,
-                name: user.name,
+                name: user.name!,
                 isLoggedIn: true,
             });
             return user;
@@ -30,19 +30,23 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     };
     const register = (data: User) => {
+        if(!data) return undefined;
         const user: User | undefined = UserData.find((user) => user.email === data.email);
         if (user) {
             return undefined;
         };
+
+
         const NewUser = {
             id: UserData.length + 1,
+            name: data.name || 'NO NAME',
             ...data
         };
-
         UserData.push(NewUser);
+
         setUser({
             email: NewUser.email,
-            name: NewUser.name,
+            name: NewUser.name!,
             isLoggedIn: true,
         });
         return NewUser;

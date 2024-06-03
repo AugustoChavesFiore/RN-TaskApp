@@ -7,18 +7,26 @@ import { useTaskContext } from '../context/TaskContext'
 import { Controller, useForm } from 'react-hook-form';
 import { Task } from '../types/task.types';
 import { ScaledSheet } from 'react-native-size-matters';
-import {  Stack } from 'expo-router';
+import {  Stack, router } from 'expo-router';
 
-export default function TaskForm() {
+export default function TaskForm({task}: {task?: Task}) {
   const { addTask  } = useTaskContext();
 
+  const defaultTask = task ? task : {
+    title: '',
+    description: '',
+    author: '',
+  };
+
+
   const { control, handleSubmit, formState: { errors }, reset } = useForm<Task>(
-    { defaultValues: { title: "", description: "", author: "" } }
+    { defaultValues: defaultTask }
   );
 
   const onSubmit = (data: Task) => {
     addTask(data);
-    return reset();
+     reset();
+     router.replace('/tasks');
   }
 
   return (
@@ -40,6 +48,7 @@ export default function TaskForm() {
             label={"Title"}
             onBlur={onBlur}
             onChangeText={onChange}
+            defaultValue={defaultTask.title}
             value={value}
           />
         )}
@@ -61,6 +70,7 @@ export default function TaskForm() {
             label={"Description"}
             onBlur={onBlur}
             onChangeText={onChange}
+            defaultValue={defaultTask.description}
             value={value}
           />
         )}
@@ -82,6 +92,7 @@ export default function TaskForm() {
             label={"Author"}
             onBlur={onBlur}
             onChangeText={onChange}
+            defaultValue={defaultTask.author}
             value={value}
           />
         )}
@@ -96,7 +107,7 @@ export default function TaskForm() {
 
 
 
-      <Button onPress={handleSubmit(onSubmit)}>Add Task</Button>
+      <Button onPress={handleSubmit(onSubmit)}>{task?'Update':'Add task'}</Button>
 
     </View>
   )
