@@ -52,9 +52,17 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         return NewUser;
     }
 
+    const lougout = () => {
+        setUser({
+            email: '',
+            name: '',
+            isLoggedIn: false,
+        });
+    };
+
 
     return (
-        <AuthContext.Provider value={{ user, login, register }}>
+        <AuthContext.Provider value={{ user, login, register, lougout }}>
             {children}
         </AuthContext.Provider>
     );

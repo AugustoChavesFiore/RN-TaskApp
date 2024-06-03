@@ -1,10 +1,11 @@
 import { View, Text, Switch } from 'react-native'
 import React, { useState } from 'react'
 import { useAuthContext } from '../auth/context/AuthContext';
+import { Button } from 'react-native-paper';
 
 export default function Settings() {
 
-  const {user} = useAuthContext()!;
+  const {user, lougout} = useAuthContext()!;
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleSwitch = () => setIsDarkMode(previousState => !previousState);
@@ -29,10 +30,12 @@ export default function Settings() {
         <Text>Nombre: {user.name}</Text>
         <Text>Email: {user.email}</Text>
       </View>
-
       <View style={{ marginTop: 20 }}>
         <Text style={{ fontSize: 18 }}>Otras Configuraciones</Text>
         <Text>Working</Text>
+      </View>
+      <View style={{ marginTop: 20 }}>
+        <Button mode='contained' onPress={lougout}>Cerrar Sesión</Button>
       </View>
     </View>
   )

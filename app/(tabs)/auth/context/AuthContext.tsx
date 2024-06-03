@@ -4,6 +4,7 @@ import { User } from '../types/user.type';
 type AuthContextType = {
     login: (data:User) => User | undefined;
     register: (data:User) => User | undefined;
+    lougout: () => void;
     user: {
         email: string;
         name: string;
