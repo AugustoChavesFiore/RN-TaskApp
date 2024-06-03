@@ -1,13 +1,17 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { Redirect, Stack, Tabs } from "expo-router";
+import { useAuthContext } from "./auth/context/AuthContext";
 
 export default function TabsLayout() {
+  const { user } = useAuthContext()!;
+
   return (
     <Tabs >
       <Tabs.Screen
         name="auth"
         options={{
           title: 'Auth',
+          href: null,
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
         }}
       />
