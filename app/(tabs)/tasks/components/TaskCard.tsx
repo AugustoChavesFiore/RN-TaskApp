@@ -17,7 +17,7 @@ export default function TaskCard({task}: {task: Task}) {
                 <Text style={styles.title}>{task.title}</Text>
                 <Portal>
                     <Modal visible={visible} onDismiss={hideModal}  contentContainerStyle={styles.containerStyle}>
-                        <ShowTask task={task} />
+                        <ShowTask task={task} hideModal={hideModal} />
                     </Modal>
                 </Portal>
             </View>

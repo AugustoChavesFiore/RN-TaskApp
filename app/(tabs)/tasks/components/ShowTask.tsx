@@ -9,7 +9,7 @@ import { router } from 'expo-router';
 
 
 
-export function ShowTask({ task }: { task: Task }) {
+export function ShowTask({ task, hideModal }: { task: Task, hideModal: () => void }) {
     const { removeTask, toggleTask } = useTaskContext();
 
 
@@ -27,6 +27,7 @@ export function ShowTask({ task }: { task: Task }) {
             <View style={styles.buttonContainer}>
                 <IconButton icon={'update'} onPress={
                     () => {
+                        hideModal();
                         router.navigate({
                             pathname: '/tasks/components/TaskForm',
                             params: { taskID: task.id }
