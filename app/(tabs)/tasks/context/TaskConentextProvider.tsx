@@ -19,9 +19,9 @@ export const TaskConentextProvider = ({children}: TaskContextType) => {
     const [tasks, dispatch] = React.useReducer(TaskReducer, initialState);
 
     const addTask = (task: Task) => {
-        const newTask = {...task, id: tasks.tasks.length + 1, completed: false, date: new Date().toLocaleDateString()};
+        const newTask = {...task, id: Date.now() , completed: false, date: new Date().toLocaleDateString()};
 
-        dispatch({type: 'ADD_TASK', payload: task});
+        dispatch({type: 'ADD_TASK', payload: newTask});
         return true;
     };
 
