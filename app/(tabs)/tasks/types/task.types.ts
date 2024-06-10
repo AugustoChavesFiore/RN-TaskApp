@@ -18,4 +18,5 @@ export type TaskAction =
     | { type: 'ADD_TASK'; payload: Task }
     | { type: 'REMOVE_TASK'; payload: number }
     | { type: 'TOGGLE_TASK'; payload: number }
-    | { type: 'UPDATE_TASK'; payload: Task };
+    | { type: 'UPDATE_TASK'; payload: Task }
+    | { type: 'FIND_TASK'; payload: number };

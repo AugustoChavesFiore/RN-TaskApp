@@ -1,23 +1,18 @@
-import { useState } from 'react';
-
-
 import { View } from 'react-native'
-import { Button, Portal, Text, Modal, IconButton } from 'react-native-paper'
+import { Text, IconButton } from 'react-native-paper'
 import { Task } from '../types/task.types'
 import { useTaskContext } from '../context/TaskContext'
 import { ScaledSheet } from 'react-native-size-matters';
-import TaskForm from './TaskForm';
+
+import { router } from 'expo-router';
 
 
 
 
 export function ShowTask({ task }: { task: Task }) {
-    const { removeTask, toggleTask, upDateTask } = useTaskContext();
+    const { removeTask, toggleTask } = useTaskContext();
 
-    const [visible, setVisible] = useState(false);
 
-    const showModal = () => setVisible(true);
-    const hideModal = () => setVisible(false);
 
     const deleteTask = (task: Task) => removeTask(task);
     const completeTask = (task: Task) => toggleTask(task);
@@ -30,15 +25,17 @@ export function ShowTask({ task }: { task: Task }) {
                 <Text style={styles.textStyle}>{task.completed ? 'Completed' : 'Not Completed'}</Text>
             </View>
             <View style={styles.buttonContainer}>
-                <IconButton icon={'update'} onPress={showModal} />
+                <IconButton icon={'update'} onPress={
+                    () => {
+                        router.navigate({
+                            pathname: '/tasks/components/TaskForm',
+                            params: { taskID: task.id }
+                        })
+                    }
+                } />
                 <IconButton icon={'clipboard-check'} onPress={() => completeTask(task)} />
                 <IconButton icon={'delete'} onPress={() => deleteTask(task)} />
             </View>
-            <Portal>
-                <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={styles.modalStyle} >
-                    <Text>Edit Task</Text>
-                </Modal>
-            </Portal>
         </View>
     )
 };
@@ -48,7 +45,7 @@ const styles = ScaledSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '10@s', 
+        padding: '10@s',
     },
     textContainer: {
         flexDirection: 'column',
@@ -56,18 +53,18 @@ const styles = ScaledSheet.create({
         marginBottom: '10@s',
     },
     textStyle: {
-        fontSize: '14@s', 
-        color: '#333', 
-        marginBottom: '10@s', 
+        fontSize: '14@s',
+        color: '#333',
+        marginBottom: '10@s',
     },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: '10@s', 
+        marginTop: '10@s',
     },
     modalStyle: {
-        backgroundColor: 'white', 
-        padding: '20@s', 
-        borderRadius: '4@s', 
+        backgroundColor: 'white',
+        padding: '20@s',
+        borderRadius: '4@s',
     },
 });

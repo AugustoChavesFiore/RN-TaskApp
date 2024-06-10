@@ -4,6 +4,7 @@ import { Task } from "../types/task.types";
 type TaskContextType = {
     tasks: Task[];
     addTask: (task: Task) => {};
+    findTask: (taskID: number) => Task | null;
     removeTask: (task: Task) => {};
     upDateTask: (task: Task) => {};
     toggleTask: (task: Task) => {};

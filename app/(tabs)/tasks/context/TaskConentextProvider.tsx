@@ -38,9 +38,15 @@ export const TaskConentextProvider = ({children}: TaskContextType) => {
     const upDateTask = (task: Task) => {
         dispatch({type: 'UPDATE_TASK', payload: task});
         return task;
-    }
+    };
 
-
+    const findTask = (taskID: number) => {
+        const task = tasks.tasks.find(task => task.id === taskID);
+        if (!task) {
+           return null;
+        }
+        return task;
+    };
 
 
   return (
@@ -49,7 +55,8 @@ export const TaskConentextProvider = ({children}: TaskContextType) => {
         addTask,
         removeTask,
         toggleTask,
-        upDateTask
+        upDateTask,
+        findTask
     }}>
       {children}
     </TaskContext.Provider>

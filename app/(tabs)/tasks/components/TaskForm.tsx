@@ -1,38 +1,54 @@
 
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View,  } from 'react-native'
 import {  TextInput, HelperText, Button } from 'react-native-paper'
 import { useTaskContext } from '../context/TaskContext'
 import { Controller, useForm } from 'react-hook-form';
 import { Task } from '../types/task.types';
 import { ScaledSheet } from 'react-native-size-matters';
-import {  Stack, router } from 'expo-router';
+import {  Stack, router, useLocalSearchParams } from 'expo-router';
 
-export default function TaskForm({task}: {task?: Task}) {
-  const { addTask  } = useTaskContext();
+export default function TaskForm() {
+  const { addTask, findTask, upDateTask  } = useTaskContext();
 
-  const defaultTask = task ? task : {
-    title: '',
-    description: '',
-    author: '',
-  };
+   const {taskID} = useLocalSearchParams()
+   
+    useEffect(() => {
+      if (taskID) {
+        const task = findTask(+taskID);
+        if (task) {
+          reset(task);
+        };
+      }
+    }, [taskID]);
+
+
+
 
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm<Task>(
-    { defaultValues: defaultTask }
+    { defaultValues: {
+      title: "" ,
+      description: "",
+      author: ""
+    } }
   );
 
   const onSubmit = (data: Task) => {
-    addTask(data);
-     reset();
-     router.replace('/tasks');
+   if(taskID){
+      upDateTask(data);   
   }
+  else{
+    addTask(data);
+  }
+    router.navigate({pathname: '/tasks'});
+  };
 
   return (
     <View style={styles.containerStyle}>
       <Stack.Screen options={
-        {title: 'Add Task',
+        {title: taskID?'Update Task':'Add Task',
         headerStyle: {
           backgroundColor: '#464646',
         },
@@ -48,7 +64,7 @@ export default function TaskForm({task}: {task?: Task}) {
             label={"Title"}
             onBlur={onBlur}
             onChangeText={onChange}
-            defaultValue={defaultTask.title}
+            defaultValue={value}
             value={value}
           />
         )}
@@ -70,7 +86,7 @@ export default function TaskForm({task}: {task?: Task}) {
             label={"Description"}
             onBlur={onBlur}
             onChangeText={onChange}
-            defaultValue={defaultTask.description}
+            defaultValue={value}
             value={value}
           />
         )}
@@ -92,7 +108,7 @@ export default function TaskForm({task}: {task?: Task}) {
             label={"Author"}
             onBlur={onBlur}
             onChangeText={onChange}
-            defaultValue={defaultTask.author}
+            defaultValue={value}
             value={value}
           />
         )}
@@ -107,7 +123,7 @@ export default function TaskForm({task}: {task?: Task}) {
 
 
 
-      <Button mode='contained' onPress={handleSubmit(onSubmit)}>{task?'Update':'Add task'}</Button>
+      <Button mode='contained' onPress={handleSubmit(onSubmit)}>{taskID?'Update':'Add task'}</Button>
 
     </View>
   )
