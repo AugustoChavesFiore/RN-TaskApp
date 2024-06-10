@@ -107,7 +107,7 @@ export default function TaskForm({task}: {task?: Task}) {
 
 
 
-      <Button onPress={handleSubmit(onSubmit)}>{task?'Update':'Add task'}</Button>
+      <Button mode='contained' onPress={handleSubmit(onSubmit)}>{task?'Update':'Add task'}</Button>
 
     </View>
   )

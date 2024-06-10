@@ -24,10 +24,10 @@ export function ShowTask({ task }: { task: Task }) {
     return (
         <View style={styles.containerStyle}>
             <View style={styles.textContainer} >
-            <Text style={styles.textStyle}>{task.title}</Text>
-            <Text style={styles.textStyle}>{task.description}</Text>
-            <Text style={styles.textStyle}>{task.date}</Text>
-            <Text style={styles.textStyle}>{task.completed ? 'Completed' : 'Not Completed'}</Text>
+                <Text style={styles.textStyle}>{task.title}</Text>
+                <Text style={styles.textStyle}>{task.description}</Text>
+                <Text style={styles.textStyle}>{task.date}</Text>
+                <Text style={styles.textStyle}>{task.completed ? 'Completed' : 'Not Completed'}</Text>
             </View>
             <View style={styles.buttonContainer}>
                 <IconButton icon={'update'} onPress={showModal} />
@@ -46,11 +46,14 @@ export function ShowTask({ task }: { task: Task }) {
 const styles = ScaledSheet.create({
     containerStyle: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: '10@s', 
     },
     textContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
+        marginBottom: '10@s',
     },
     textStyle: {
         fontSize: '14@s', 

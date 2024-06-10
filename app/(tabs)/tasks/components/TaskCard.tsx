@@ -35,17 +35,9 @@ const styles = ScaledSheet.create({
     title: {
         fontSize: '20@s',
     },
-    description: {
-        fontSize: '16@s',
-    },
-    date: {
-        fontSize: '14@s',
-    },
-    completed: {
-        fontSize: '14@s',
-    },
     containerStyle: {
         backgroundColor: '#dcdcdc',
+        height: '50%',
         padding: '20@s',
         margin: '20@s',
         borderRadius: '10@s',
